@@ -1,6 +1,6 @@
 {
-    "name": "webs-app-fe",
-    "script": "server/index.js",
+    "name": "vaccine-privypass",
+    "script": "./node_modules/nuxt/bin/nuxt.js",
     "instances": "1",
     "env": {
       "NODE_ENV": "production"
