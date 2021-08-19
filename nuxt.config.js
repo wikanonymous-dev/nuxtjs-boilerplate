@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title    : 'nuxt-boilerplate',
+    title    : 'Vaccine PrivyPass',
     htmlAttrs: { lang: 'en' },
     meta     : [
       { charset: 'utf-8' },
@@ -33,10 +33,15 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    ['@nuxtjs/stylelint-module', { fix: true, quiet: true }],
+    ['@nuxtjs/stylelint-module', { fix: true, quiet: true }], '@nuxtjs/moment',
     // uncomment for auto lint on save
     // '@nuxtjs/eslint-module',
   ],
+
+  moment: {
+    plugin : false,
+    locales: ['en', 'id'],
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios'],
@@ -45,6 +50,24 @@ export default {
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build           : { babel: { plugins: ['lodash'] } },
+  build: {
+    extractCSS: (process.env.NODE_ENV === 'production'),
+    babel     : { plugins: ['lodash'] },
+    loaders   : {
+      vue: {
+        transformAssetUrls: {
+          'img'             : 'src',
+          'image'           : 'xlink:href',
+          'b-img'           : 'src',
+          'b-img-lazy'      : ['src', 'blank-src'],
+          'b-card'          : 'img-src',
+          'b-card-img'      : 'img-src',
+          'b-carousel-slide': 'img-src',
+          'b-embed'         : 'src',
+          'img-viewer'      : 'src',
+        },
+      },
+    },
+  },
   serverMiddleware: [{ path: '/ping', handler: '~/server-middleware/ping-route.js' }],
 }
